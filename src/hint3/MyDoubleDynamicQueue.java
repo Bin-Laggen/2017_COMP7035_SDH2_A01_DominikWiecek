@@ -40,7 +40,15 @@ public class MyDoubleDynamicQueue<T> implements MyQueue<T> {
 	// Basic Operation (Partial) --> Get first element from front of MyQueue: first
 	//-------------------------------------------------------------------
 	public T first(){
-		return head.getInfo();
+		if(numItems > 0)
+		{
+			return head.getInfo();
+		}
+		else
+		{
+			System.out.println("ERROR - Queue is empty");
+			return null;
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -49,34 +57,38 @@ public class MyDoubleDynamicQueue<T> implements MyQueue<T> {
 	public void addByFirst(T element){
 		if(numItems == 0)
 		{
-			head = new MyDoubleLinkedNode<T>(null, element, tail);
-			tail = new MyDoubleLinkedNode<T>(head, element, null);
-			numItems++;
+			head = new MyDoubleLinkedNode<T>(null, element, null);
+			tail = head;
 		}
 		else
 		{
-			System.out.println(head);
-			MyDoubleLinkedNode<T> currentNode = head;
-			currentNode.setLeft(head);
-			head = new MyDoubleLinkedNode<T>(null, element, currentNode);
-			numItems++;
+			MyDoubleLinkedNode<T> oldHead = head;
+			head = new MyDoubleLinkedNode<T>(null, element, oldHead);
+			oldHead.setLeft(head);
 		}
+		numItems++;
 	}
 	
 	//-------------------------------------------------------------------
 	// Basic Operation (Partial) --> Remove element from front of MyQueue: removeByFirst 
 	//-------------------------------------------------------------------	
 	public void removeByFirst(){
-		if(numItems > 0)
+		if(numItems > 1)
 		{
-			System.out.println(head.getRight());
-			MyDoubleLinkedNode<T> nextNode = head.getRight();
-			nextNode.setLeft(head);
-			head.setInfo(nextNode.getInfo());
-			head.setRight(nextNode.getRight());
+			head = head.getRight();
 			head.setLeft(null);
 			
 			numItems--;
+		}
+		else if(numItems == 1)
+		{
+			head = null;
+			tail = null;
+			numItems--;
+		}
+		else
+		{
+			System.out.println("ERROR - Queue is empty");
 		}
 	}
 
@@ -84,7 +96,15 @@ public class MyDoubleDynamicQueue<T> implements MyQueue<T> {
 	// Basic Operation (Partial) --> Get first element from front of MyQueue: last
 	//-------------------------------------------------------------------
 	public T last(){
-		return tail.getInfo();
+		if(numItems > 0)
+		{
+			return tail.getInfo();
+		}
+		else
+		{
+			System.out.println("ERROR - Queue is empty");
+			return null;
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -93,15 +113,15 @@ public class MyDoubleDynamicQueue<T> implements MyQueue<T> {
 	public void addByLast(T element){
 		if(numItems == 0)
 		{
-			head = new MyDoubleLinkedNode<T>(null, element, tail);
-			tail = new MyDoubleLinkedNode<T>(head, element, null);
+			head = new MyDoubleLinkedNode<T>(null, element, null);
+			tail = head;
 			numItems++;
 		}
 		else
 		{
-			MyDoubleLinkedNode<T> currentNode = tail;
-			currentNode.setRight(tail);
-			tail = new MyDoubleLinkedNode<T>(currentNode, element, null);
+			MyDoubleLinkedNode<T> oldTail = tail;
+			tail = new MyDoubleLinkedNode<T>(oldTail, element, null);
+			oldTail.setRight(tail);
 			numItems++;
 		}
 	}
@@ -110,9 +130,21 @@ public class MyDoubleDynamicQueue<T> implements MyQueue<T> {
 	// Basic Operation (Partial) --> Remove element from front of MyQueue: removeByFirst 
 	//-------------------------------------------------------------------	
 	public void removeByLast(){
-		if(numItems > 0)
+		if(numItems > 1)
 		{
+			tail = tail.getLeft();
+			tail.setRight(null);
 			numItems--;
+		}
+		else if(numItems == 1)
+		{
+			tail = null;
+			head = null;
+			numItems--;
+		}
+		else
+		{
+			System.out.println("ERROR - Queue is empty");
 		}
 	}
 	

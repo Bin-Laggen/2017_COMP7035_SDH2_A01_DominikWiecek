@@ -35,9 +35,7 @@ public class MyMain {
 		//	3. Add some elements 
 		//-------------------------------------
 		m1.addByFirst(3); //--> m1 : [3]
-		System.out.println(m1.first() + " " + m1.last());
 		m1.addByFirst(4); //--> m1 : [4, 3]
-		System.out.println(m1.first() + " " + m1.last());
 		
 		m1.addByLast(6); //--> m1 : [4, 3, 6]
 		m1.addByLast(5); //--> m1 : [4, 3, 6, 5]
@@ -68,7 +66,6 @@ public class MyMain {
 		System.out.println("Is m1 empty? " + m1.isEmpty()); //--> The current length is 0 as myQueue is created initially empty
 		m1.removeByFirst();
 		m1.removeByLast();
-	
 	}
 	
 	//-------------------------------------

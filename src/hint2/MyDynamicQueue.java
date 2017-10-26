@@ -36,7 +36,15 @@ public class MyDynamicQueue implements MyQueue {
 	// Basic Operation (Partial) --> Get first element from front of MyQueue: first
 	//-------------------------------------------------------------------
 	public int first(){
-		return this.head.getInfo();
+		if(numItems > 0)
+		{
+			return this.head.getInfo();
+		}
+		else
+		{
+			System.out.println("ERROR - Queue is empty");
+			return 0;
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -74,13 +82,17 @@ public class MyDynamicQueue implements MyQueue {
 		if(numItems == 1)
 		{
 			head = null;
+			numItems--;
+		}
+		else if(numItems > 1)
+		{
+			head = head.getNext();
+			numItems--;
 		}
 		else
 		{
-			head.setInfo(head.getNext().getInfo());
-			head.setNext(head.getNext().getNext());
+			System.out.println("ERROR - Queue is empty");
 		}
-		numItems--;
 	}
 	
 	

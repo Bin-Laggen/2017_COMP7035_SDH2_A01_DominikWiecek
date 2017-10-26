@@ -1,3 +1,5 @@
+package hint1;
+
 
 /**
 * ADT MyQueue: Public Part<br>. 

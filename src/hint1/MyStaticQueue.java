@@ -27,7 +27,6 @@ public class MyStaticQueue implements MyQueue {
 	public boolean isEmpty(){
 		if(numItems == 0)
 		{
-			System.out.println("ERROR - Queue is empty");
 			return true;
 		}
 		else
@@ -40,12 +39,13 @@ public class MyStaticQueue implements MyQueue {
 	// Basic Operation (Partial) --> Get first element from front of MyQueue: first
 	//-------------------------------------------------------------------
 	public int first(){
-		if(!isEmpty())
+		if(numItems > 0)
 		{
 			return this.items[0];	
 		}	
 		else
 		{
+			System.out.println("ERROR - Queue is empty");
 			return this.items[0];
 		}
 	}
@@ -54,15 +54,22 @@ public class MyStaticQueue implements MyQueue {
 	// Basic Operation (Partial) --> Add element to back of MyQueue: add 
 	//-------------------------------------------------------------------
 	public void add(int element){
-		this.items[numItems] = element;
-		numItems++;
+		if(numItems < maxItems)
+		{
+			this.items[numItems] = element;
+			numItems++;
+		}
+		else
+		{
+			System.out.println("ERROR - Queue is full");
+		}
 	}
 	
 	//-------------------------------------------------------------------
 	// Basic Operation (Partial) --> Remove element from front of MyQueue: remove 
 	//-------------------------------------------------------------------	
 	public void remove(){
-		if(!isEmpty())
+		if(numItems > 0)
 		{
 			int[] tempItems = new int[maxItems];
 			for(int i = 1; i < numItems; i++)
@@ -74,7 +81,7 @@ public class MyStaticQueue implements MyQueue {
 		}
 		else
 		{
-			isEmpty();
+			System.out.println("ERROR - Queue is empty");
 		}
 	}
 	

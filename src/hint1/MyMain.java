@@ -1,3 +1,5 @@
+package hint1;
+
 
 /**
 * The main class of our project.<br>. 
@@ -30,7 +32,7 @@ public class MyMain {
 		m.add(3); //--> m : [3]
 		m.add(4);	//--> m : [3, 4]	
 		m.add(5); //--> m : [3, 4, 5]
-		//m.add(6); //--> Fails, as myQueue is already full
+		m.add(6); //--> Fails, as myQueue is already full
 		
 		//-------------------------------------
 		//	4. Get the first item in myQueue and make myQueue  
